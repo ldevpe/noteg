@@ -26,11 +26,16 @@
          }
          </style>
          <script>
+         var speed = 5;
+         var src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdZjDMKFtX2RY2qHufZ592kF3rBt_Dt6d11eFPtUvpN48kFQTu&s";
+         var angle = 0;
+         var mod = 0;
+         </script>
+         <script>
             function f_ok_u1(){
                 console.log("hi");
                 document.getElementById('b_u1').style.display = 'none';
             }
-
             function f_ok_b1(){
                 console.log("hi");
                 document.getElementById('b_b1').style.display = 'none';
@@ -101,16 +106,41 @@
             }
         }
         function span_code(){
-            if(document.getElementById('f_code').style.display == 'none')
-            {
-                document.getElementById('f_code').style.display = 'block';
-                //document.getElementById('f2').innerText = 'Hide Documentation Below';
-            }
-            else
-            {
-                document.getElementById('f_code').style.display = 'none';
-               // document.getElementById('f2').innerText = 'Add Documentation Below';
-            }
+            
+                var visit1 = false;
+                var string1 = document.getElementById('dis2').value;
+                console.log(document.getElementById('dis2').value);
+                var line1 = string1.split(" ");
+                if(line1[0] == "make" && line1[1] == "car")
+                {
+                    visit1 = true; 
+                }
+                if(visit1 == true)
+                {
+                    if(line1[2].includes("(") == true)
+                    {
+                        var s2 = line1[2].split("(");
+
+                        var s3 = s2[1].split(")");
+                        var arguments = s3[0].split(",");
+                        src = arguments[0];
+                        speed = parseInt(arguments[1]);
+                        console.log(speed);
+                        angle  = parseInt(arguments[2]);
+                        console.log(angle);
+
+                    }
+                    document.getElementById('f_code').style.display = 'block';
+                    document.getElementById('f_comment').style.display = 'none';
+                }
+                else if (visit1 == false)
+                {
+                    
+                    document.getElementById('f_code').style.display = 'none';
+                    document.getElementById('f_comment').style.display = 'block';
+                  
+                }
+                
         }
         
         </script>
@@ -140,45 +170,87 @@
             <span style="float:right;color: black;cursor: pointer;color: red;"class="span1" onclick="span_f2()" id="f2">Add Documetation Below</span>
         </div>
         <div>
-            <textarea name="code" id="dis2" style="min-height: 10rem;width: 100%;margin-top: 0.5rem;font-size: 1.5rem;display: none;">--------- Type in your Code here ---------  
-            
-            </textarea>
+            <textarea name="code" id="dis2" style="min-height: 10rem;width: 100%;margin-top: 0.5rem;font-size: 1.5rem;display: none;">--------- Type in your Code here ---------</textarea>
+        </div>
+        <div style="text-align: center;background: white;margin-top: 1rem;display: none;" id="f_comment">
+            Invalid command
         </div>
         <div style="text-align: center;background: white;margin-top: 1rem;display: none;" id="f_code"  >
             <html>
-                <canvas id="myCanvas" width="200" height="200"
-                style="border:1px solid #000000;">
-                </canvas>
+                <head>
+                    <style>
+                    #canvas {
+                    border: 2px solid #333;
+                }</style>
                 <script>
-                    var canvas = document.getElementById("myCanvas");
-                    var ctx = canvas.getContext("2d");
-                    ctx.beginPath();
-                    ctx.arc(100,100,50,0,2*Math.PI);
-                    ctx.stroke();
-                </script>
-                <script>
-                    var canvas = document.getElementById("myCanvas");
-                    var ctx = canvas.getContext("2d");
-                    ctx.beginPath();
-                    ctx.arc(100,100,35,0,Math.PI);
-                    ctx.stroke();
-                </script>
-                <script>
-                    var canvas = document.getElementById("myCanvas");
-                    var ctx = canvas.getContext("2d");
-                    ctx.beginPath();
-                    ctx.arc(85,90,5,0,2*Math.PI);
-                    ctx.stroke();
-                </script>
-                <script>
-                    var canvas = document.getElementById("myCanvas");
-                    var ctx = canvas.getContext("2d");
-                    ctx.beginPath();
-                    ctx.arc(115,90,5,0,2*Math.PI);
-                    ctx.stroke();
-                </script>
+                    window.onload = function()
+                {
+                x = 0;
+                y = 0;
+               
+                mod = 0;
                 
-            </html>
+                canvas = document.getElementById("canvas");
+                context = canvas.getContext("2d");
+                car = new Image();
+                car.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdZjDMKFtX2RY2qHufZ592kF3rBt_Dt6d11eFPtUvpN48kFQTu&s";
+                
+                window.addEventListener("keydown", keypress_handler, false);
+                window.addEventListener("keyup", keyup_handler, false);
+                
+                var moveInterval = setInterval(function () {
+                    draw();
+                }, 30);
+                
+                function draw() {
+                    context = canvas.getContext("2d");
+                    context.clearRect(0, 0, 800, 800);
+                
+                    context.fillStyle = "rgb(200, 100, 220)";
+                    
+                
+                    x += (speed * mod) * Math.cos(Math.PI / 180 * angle);
+                    y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
+                
+                    context.save();
+                    context.translate(x, y);
+                    context.rotate(Math.PI / 180 * angle);
+                  context.drawImage(car, 0,0);
+                    context.restore();
+                }
+                
+                function keyup_handler(event) {
+                    if (event.keyCode == 87 || event.keyCode == 83) {
+                        mod = 0;
+                    }
+                }
+                
+                function keypress_handler(event) {
+                    console.log(event.keyCode);
+                    if (event.keyCode == 87) {
+                        mod = 1;
+                    }
+                    if (event.keyCode == 83) {
+                        mod = -1;
+                    }
+                    if (event.keyCode == 65) {
+                        angle -= 5;
+                    }
+                    if (event.keyCode == 68) {
+                        angle += 5;
+                    }
+                }
+                }
+                </script>
+                </head>  
+                <body>
+                    <h1>WASD To Move</h1>
+                
+                   <canvas id="canvas" width="800" height="800"></canvas>
+                
+                </body>  
+                </html>
+                
 
         </div>
         
