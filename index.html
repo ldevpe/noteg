@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GameBook</title>
+         <style>
+             .span1:hover{
+                 font-size: 1.2rem;
+                 font-weight: 900;
+             }
+          .b1{
+            border: none;
+            background-color: #fff;
+            border-radius: 2rem;
+            width: 13rem;
+            height: 3rem;
+            font-size: 1.5rem;border: 3px solid #456FFF;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', 'sans-serif';
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+            cursor: pointer;
+             }
+         .b1:hover
+         {
+            background-color: black;
+            color: white;
+         }
+         </style>
+         <script>
+            function f_ok_u1(){
+                console.log("hi");
+                document.getElementById('b_u1').style.display = 'none';
+            }
+
+            function f_ok_b1(){
+                console.log("hi");
+                document.getElementById('b_b1').style.display = 'none';
+            }
+            </script>
+        <script>
+        var i = 0;
+        </script>
+        <script>
+         function newCell(){
+            if(document.getElementById('dis1').style.display == 'none')
+            {
+                document.getElementById('dis1').style.display = 'block';
+                document.getElementById('dis2').style.display = 'block';
+            }
+            else{
+                document.getElementById('dis1').style.display = 'none';
+                document.getElementById('dis2').style.display = 'none';
+            }
+         }
+         </script>
+        
+                   
+    </head>
+    <body style="background: #F6F6F6;color:black;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+        <script>
+        function func1(){
+            if(document.getElementById('frame').style.display == 'none')
+            {
+                document.getElementById('frame').style.display = 'block';
+            }
+            else{
+                document.getElementById('frame').style.display = 'none';
+            }
+        }
+        </script>
+        <script>
+        function span_f1(){
+            if(document.getElementById('head_above').style.display == 'none')
+            {
+                document.getElementById('head_above').style.display = 'block';
+                document.getElementById('f1').innerText = 'Hide Documentation Above';
+            }
+            else
+            {
+                document.getElementById('head_above').style.display = 'none'
+                document.getElementById('f1').innerText = 'Add Documentation Above';
+            }
+        }
+        function span_f2(){
+            if(document.getElementById('head_below').style.display == 'none')
+            {
+                document.getElementById('head_below').style.display = 'block';
+                document.getElementById('f2').innerText = 'Hide Documentation Below';
+            }
+            else
+            {
+                document.getElementById('head_below').style.display = 'none';
+                document.getElementById('f2').innerText = 'Add Documentation Below';
+            }
+        }
+        function span_code(){
+            if(document.getElementById('f_code').style.display == 'none')
+            {
+                document.getElementById('f_code').style.display = 'block';
+                //document.getElementById('f2').innerText = 'Hide Documentation Below';
+            }
+            else
+            {
+                document.getElementById('f_code').style.display = 'none';
+               // document.getElementById('f2').innerText = 'Add Documentation Below';
+            }
+        }
+        
+        </script>
+        <div style="height: 6rem;background: white;text-align: center;border-radius: 1rem;">
+            <h1>ηote<span style="color: #456FFF;">Ḡ</span></h1>
+              
+        </div>        
+        <button class="b1" onclick="newCell()" style="margin: 1rem;">
+            <span>+</span>  New Cell 
+        </button>
+        <button class="b1" onclick="delCell()" style="margin: 1rem;float: right;">
+            <span>-</span>  Delete Cell 
+        </button> 
+        
+        <div style="color:black;padding:1rem;background-color: white;font-size: 1.1rem;text-align: center;margin-bottom: 1rem;display: none;" id="head_above">
+            <input type="text" id="doc_u1" style="width: 94%;border: 1px solid #333;font-size: 1.2rem;padding-top: 0.2rem;padding-bottom: 0.2rem;border: none;">
+            <span id="b_u1">
+                <button style="display: inline-block;border: none;padding-left: 1rem;padding-right: 1rem;padding-top: 0.4rem;padding-bottom: 0.4rem;background: #456FFF;border-radius: 0.5rem;font-size: 1.2rem;color: white;" onclick="f_ok_u1" >OK</button>
+           
+            </span>
+            <div style="display: none;" id="con_u1">Heading Above</div>
+                
+        </div>
+        <div style="border:2px solid #456FFF; border-radius: 0.6rem;padding: 1em;display: none;" id="dis1" >
+            <span style="float: left;color: black;cursor: pointer;" class="span1" onclick="span_f1()" id="f1">Add Documetation Above</span>
+            <span style="margin-left: 30rem;color: black;cursor: pointer;"class="span1" onclick="span_code()">Run Code Snippet</span>
+            <span style="float:right;color: black;cursor: pointer;"class="span1" onclick="span_f2()" id="f2">Add Documetation Below</span>
+        </div>
+        <div>
+            <textarea name="code" id="dis2" style="min-height: 10rem;width: 100%;margin-top: 0.5rem;font-size: 1.5rem;display: none;">--------- Type in your Code here ---------  
+            
+            </textarea>
+        </div>
+        <div style="text-align: center;background: white;margin-top: 1rem;display: none;" id="f_code"  >
+            <html>
+                <canvas id="myCanvas" width="200" height="200"
+                style="border:1px solid #000000;">
+                </canvas>
+                <script>
+                    var canvas = document.getElementById("myCanvas");
+                    var ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    ctx.arc(100,100,50,0,2*Math.PI);
+                    ctx.stroke();
+                </script>
+                <script>
+                    var canvas = document.getElementById("myCanvas");
+                    var ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    ctx.arc(100,100,35,0,Math.PI);
+                    ctx.stroke();
+                </script>
+                <script>
+                    var canvas = document.getElementById("myCanvas");
+                    var ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    ctx.arc(85,90,5,0,2*Math.PI);
+                    ctx.stroke();
+                </script>
+                <script>
+                    var canvas = document.getElementById("myCanvas");
+                    var ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    ctx.arc(115,90,5,0,2*Math.PI);
+                    ctx.stroke();
+                </script>
+                
+            </html>
+
+        </div>
+        
+        <div style="color:black;padding:1rem;background-color: white;font-size: 1.1rem;text-align: center;margin-top: 1rem;display: none;" id="head_below">
+        
+        <input type="text" id="doc_u1" style="width: 94%;border: 1px solid #333;font-size: 1.2rem;padding-top: 0.2rem;padding-bottom: 0.2rem;border: none;">
+            <span id="b_b1">
+                <button style="display: inline-block;border: none;padding-left: 1rem;padding-right: 1rem;padding-top: 0.4rem;padding-bottom: 0.4rem;background: #456FFF;border-radius: 0.5rem;font-size: 1.2rem;color: white;" onclick="f_ok_b1" >OK</button>
+           
+            </span>
+            
+           
+        </div>
+        </div>
+    </body>
+</html>
