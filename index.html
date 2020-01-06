@@ -49,6 +49,8 @@
             else{
                 document.getElementById('dis1').style.display = 'none';
                 document.getElementById('dis2').style.display = 'none';
+                document.getElementById('head_below').style.display = 'none';
+                document.getElementById('head_above').style.display = 'none';
             }
          }
          </script>
@@ -127,9 +129,9 @@
                 
         </div>
         <div style="border:2px solid #456FFF; border-radius: 0.6rem;padding: 1em;display: none;" id="dis1" >
-            <span style="float: left;color: black;cursor: pointer;" class="span1" onclick="span_f1()" id="f1">Add Documetation Above</span>
+            <span style="float: left;color: black;cursor: pointer;color: red;" class="span1" onclick="span_f1()" id="f1">Add Documetation Above</span>
             <span style="margin-left: 30rem;color: black;cursor: pointer;"class="span1" onclick="span_code()">Run Code Snippet</span>
-            <span style="float:right;color: black;cursor: pointer;"class="span1" onclick="span_f2()" id="f2">Add Documetation Below</span>
+            <span style="float:right;color: black;cursor: pointer;color: red;"class="span1" onclick="span_f2()" id="f2">Add Documetation Below</span>
         </div>
         <div>
             <textarea name="code" id="dis2" style="min-height: 10rem;width: 100%;margin-top: 0.5rem;font-size: 1.5rem;display: none;">--------- Type in your Code here ---------  
